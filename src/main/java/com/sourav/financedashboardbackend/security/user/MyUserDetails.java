@@ -33,7 +33,7 @@ public class MyUserDetails implements UserDetails {
                 user.getEmail(),
                 user.getPassword(),
                 List.of(authority),
-                user.isActive()
+                user.getActive()
         );
     }
 
