@@ -33,7 +33,7 @@ public class SecurityConfig {
     private final JwtUtils jwtUtils;
 
     private static final List<String> SECURED_URLS =
-            List.of("/api/v1/users/**");
+            List.of("/api/v1/users/**","/api/v1/records/**");
 
     @Bean
     public PasswordEncoder passwordEncoder(){

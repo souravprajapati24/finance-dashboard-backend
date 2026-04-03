@@ -1,6 +1,7 @@
 package com.sourav.financedashboardbackend.globalExceptionHandler;
 
 import com.sourav.financedashboardbackend.exceptions.AlreadyExistsException;
+import com.sourav.financedashboardbackend.exceptions.RecordNotFoundException;
 import com.sourav.financedashboardbackend.exceptions.UserNotFoundException;
 import com.sourav.financedashboardbackend.response.ApiResponse;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AlreadyExistsException.class)
     public ResponseEntity<String> handleAlreadyExists(AlreadyExistsException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+    @ExceptionHandler(RecordNotFoundException.class)
+    public ResponseEntity<String> handleRecordNot(RecordNotFoundException e) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
 
@@ -64,4 +69,5 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(404)
                 .body(new ApiResponse("API Not Found", e.getMessage()));
     }
+
 }

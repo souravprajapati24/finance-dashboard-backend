@@ -26,4 +26,5 @@ public class FinanceRecord {
     private String category;
     private LocalDate date;
     private String description;
+    private Boolean deleted = false;
 }
