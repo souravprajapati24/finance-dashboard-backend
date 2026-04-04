@@ -30,4 +30,14 @@ public interface FinanceRecordRepository extends JpaRepository<FinanceRecord ,Lo
 
     Page<FinanceRecord> findByDeletedTrue(Pageable pageable);
 
+    @Query("SELECT f.category AS category, SUM(f.amount) AS total " +
+            "FROM FinanceRecord f " +
+            "WHERE f.deleted = false " +
+            "GROUP BY f.category")
+    List<Object[]> findCategoryTotals();
+    List<FinanceRecord> findAllByDeletedFalse();
+
+
+
+
 }

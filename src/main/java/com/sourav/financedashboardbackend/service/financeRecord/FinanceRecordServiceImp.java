@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class FinanceRecordImp implements FinanceRecordService{
+public class FinanceRecordServiceImp implements FinanceRecordService{
     private final ModelMapper mapper;
     private final FinanceRecordRepository financeRecordRepository;
 
@@ -153,7 +153,7 @@ public class FinanceRecordImp implements FinanceRecordService{
                 .toList();
     }
 
-    private FinanceRecordResponse convertToRecordDto(FinanceRecord record){
+    public FinanceRecordResponse convertToRecordDto(FinanceRecord record){
         return mapper.map(record , FinanceRecordResponse.class);
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -33,12 +33,6 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleAllOtherExceptions(Exception e) {
-        e.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error, Please try again later.");
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse> handleValidationExceptions(MethodArgumentNotValidException e) {
 
@@ -50,24 +44,19 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<ApiResponse> handleMethodNotAllowed(HttpRequestMethodNotSupportedException e) {
-        return ResponseEntity.status(405)
-                .body(new ApiResponse("Method Not Allowed", e.getMessage()));
+        return ResponseEntity.status(METHOD_NOT_ALLOWED)
+                .body(new ApiResponse("405, Method Not Allowed", e.getMessage()));
     }
     @ExceptionHandler(org.springframework.security.access.AccessDeniedException.class)
     public ResponseEntity<ApiResponse> handleAccessDenied(Exception e) {
-        return ResponseEntity.status(403)
-                .body(new ApiResponse("Access Denied", e.getMessage()));
+        return ResponseEntity.status(FORBIDDEN)
+                .body(new ApiResponse("403, Access Denied", e.getMessage()));
     }
 
     @ExceptionHandler(org.springframework.security.authentication.AuthenticationCredentialsNotFoundException.class)
     public ResponseEntity<ApiResponse> handleUnauthorized(Exception e) {
-        return ResponseEntity.status(401)
-                .body(new ApiResponse("Unauthorized", e.getMessage()));
-    }
-    @ExceptionHandler(org.springframework.web.servlet.NoHandlerFoundException.class)
-    public ResponseEntity<ApiResponse> handleNotFound(Exception e) {
-        return ResponseEntity.status(404)
-                .body(new ApiResponse("API Not Found", e.getMessage()));
+        return ResponseEntity.status(UNAUTHORIZED)
+                .body(new ApiResponse("401", e.getMessage()));
     }
 
 }

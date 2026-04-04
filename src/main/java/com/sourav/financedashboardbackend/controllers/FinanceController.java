@@ -24,7 +24,7 @@ import static org.springframework.http.HttpStatus.*;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/${api.prefix}/records")
+@RequestMapping("${api.prefix}/records")
 public class FinanceController {
 
     private final FinanceRecordService financeRecordService;
