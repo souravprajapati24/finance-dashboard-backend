@@ -179,6 +179,7 @@ Make sure you have the following installed:
 ### Initial Data
 
 The application includes a data initializer that automatically inserts default user as a admin and roles when the application starts for the first time. This helps in testing the system without manual setup.
+Uncomment the @Component annotation before running.
 
 ### Access API Documentation
 
